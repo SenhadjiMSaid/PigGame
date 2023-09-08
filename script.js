@@ -1,5 +1,5 @@
 'use strict';
-
+//DOM manipulation
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector('.player--1');
 const score0EL = document.querySelector('#score--0');
@@ -16,6 +16,7 @@ const winnerSound = document.querySelector('.sound--winnig');
 
 const diceEl = document.querySelector('.dice');
 
+// creat a function for the game
 let scores, currentScore, activePlayer, playing;
 
 function init() {
@@ -47,8 +48,7 @@ function switchPlayer() {
   player1El.classList.toggle('player--active');
 }
 
-// Roll Dice Event
-btnRoll.addEventListener('click', function () {
+function roll() {
   if (playing) {
     //Make sound effect of dice roll.
     diceSound.pause();
@@ -67,9 +67,9 @@ btnRoll.addEventListener('click', function () {
       switchPlayer();
     }
   }
-});
+}
 
-btnHold.addEventListener('click', function () {
+function hold() {
   if (playing && currentScore > 0) {
     scores[activePlayer] += currentScore;
     document.getElementById(`score--${activePlayer}`).textContent =
@@ -89,11 +89,14 @@ btnHold.addEventListener('click', function () {
       switchPlayer();
     }
   }
-});
+}
+
+//Event manipulation
+btnRoll.addEventListener('click', roll);
+btnHold.addEventListener('touchstart', roll);
+
+btnHold.addEventListener('click', hold);
+btnHold.addEventListener('touchstart', hold);
 
 btnNew.addEventListener('click', init);
-
-const str =
-  'JAVASCRIPT IS A HIGH-LEVEL, PROTOTYPE-BASED OBJECT-ORIENTED, MULTI-PARADIGM, INTERPRETED OR JUST-IN-TIME COMPILED, DYNAMIC, SINGLE-THREADED, GARBAGE-COLLECTED PROGRAMMING LANGUAGE WITH FIRST-CLASS FUNCTIONS AND A NON-BLOCKING EVENT LOOP CONCURRENCY MODEL.';
-
-console.log(str.toLowerCase());
+btnNew.addEventListener('touchstart', init);

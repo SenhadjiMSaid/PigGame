@@ -51,6 +51,7 @@ function switchPlayer() {
 btnRoll.addEventListener('click', function () {
   if (playing) {
     //Make sound effect of dice roll.
+    diceSound.pause();
     diceSound.play();
     //Generating a random dice roll?
     const diceRoll = Math.floor(Math.random() * 6) + 1;
